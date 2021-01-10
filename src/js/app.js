@@ -96,7 +96,6 @@ function markResultAsSelected(chosenList) {
       }
       e.target.closest("li").classList.add("selected");
       getDataOfSelecedResult(list, chosenList);
-      addEventListenerToPlanTrips(inputData);
     })
   }
 }
@@ -114,6 +113,7 @@ function getDataOfSelecedResult(list, chosenList) {
         inputData.destLat = lat;
         inputData.destLong = long;
       }
+      addEventListenerToPlanTrips(inputData);
     }
   }
 }
@@ -147,21 +147,25 @@ function displayTrips(originLat, originLong, destinationLat, destinationLong) {
   let trip = "recommended-trip";
   getTripPlannigResults(originLat, originLong, destinationLat, destinationLong)
     .then(search => {
-      if (search.plans.length === 0) {
-        busContainer.innerHTML = "No Trips Found.";
-      } else {
-        for (let i = 0; i < search.plans.length; i++) {
-          if ((search.plans[i].number === 2) && (search.plans[i].segments.length > 2)) {
-            busContainer.insertAdjacentHTML('beforeend', `
+      if (search !== undefined) {
+        if (search.plans.length === 0) {
+          busContainer.innerHTML = "No Trips Found.";
+        } else {
+          for (let i = 0; i < search.plans.length; i++) {
+            if ((search.plans[i].number === 2) && (search.plans[i].segments.length > 2)) {
+              busContainer.insertAdjacentHTML('beforeend', `
             <h3>Alternative Trips</h3>
             <ul class="alternative-trip my-trip"></ul>
           `);
-            trip = "alternative-trip";
-          }
-          if (search.plans[i].segments.length > 2) {
-            getInfoForEachSegment(search.plans[i].segments, trip);
+              trip = "alternative-trip";
+            }
+            if (search.plans[i].segments.length > 2) {
+              getInfoForEachSegment(search.plans[i].segments, trip);
+            }
           }
         }
+      } else {
+        busContainer.innerHTML = "No Trips Found.";
       }
     });
 }
