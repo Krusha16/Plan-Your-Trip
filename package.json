@@ -1,0 +1,22 @@
+{
+  "name": "apifinalproject",
+  "version": "1.0.0",
+  "description": "final project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Krusha16/apiFInalProject.git"
+  },
+  "author": "krusha",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Krusha16/apiFInalProject/issues"
+  },
+  "homepage": "https://github.com/Krusha16/apiFInalProject#readme",
+  "devDependencies": {
+    "gulp": "^4.0.2"
+  }
+}
